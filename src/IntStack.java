@@ -1,11 +1,11 @@
 
-public class LongStack {
+public class IntStack {
 
    public static void main (String[] argum) {
       // TODO!!! Your tests here!
    }
 
-   LongStack() {
+   IntStack() {
       // TODO!!! Your constructor here!
    }
 
@@ -18,11 +18,11 @@ public class LongStack {
       return false; // TODO!!! Your code here!
    }
 
-   public void push (long a) {
+   public void push (int a) {
       // TODO!!! Your code here!
    }
 
-   public long pop() {
+   public int pop() {
       return 0; // TODO!!! Your code here!
    } // pop
 
@@ -30,7 +30,7 @@ public class LongStack {
       // TODO!!!
    }
   
-   public long tos() {
+   public int tos() {
       return 0; // TODO!!! Your code here!
    }
 
@@ -44,7 +44,7 @@ public class LongStack {
       return null; // TODO!!! Your code here!
    }
 
-   public static long interpret (String pol) {
+   public static int interpret (String pol) {
       return 0; // TODO!!! Your code here!
    }
 

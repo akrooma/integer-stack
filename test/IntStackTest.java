@@ -5,11 +5,11 @@ import org.junit.Test;
 /** Testklass.
  * @author jaanus
  */
-public class LongStackTest {
+public class IntStackTest {
 
    @Test (timeout=1000)
    public void testNewStack() { 
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       assertTrue ("new stack must be empty;", m.stEmpty());
       m.push (1);
       m.pop();
@@ -18,11 +18,11 @@ public class LongStackTest {
 
    @Test (timeout=1000)
    public void testLIFO() {
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       m.push (6);
       m.push (-3);
-      long i1 = m.pop();
-      long i2 = m.pop();
+      int i1 = m.pop();
+      int i2 = m.pop();
       assertTrue ("After two pushes and two pops stack must be empty;",
          m.stEmpty());
       assertTrue ("LIFO order must hold: 6 -3 returns -3 first;",
@@ -31,20 +31,14 @@ public class LongStackTest {
 
    @Test (timeout=1000)
    public void testOp() {
-      long tt = 0;
-      LongStack m = new LongStack();
+      int tt = 0;
+      IntStack m = new IntStack();
       m.push (5);
       m.push (3);
       m.op ("+");
       tt = m.pop();
       assertTrue ("5 + 3 must be 8; ", tt==8);
       assertTrue ("push push op pop must not grow the stack; ", m.stEmpty());
-      m.push (2147483649L);
-      m.push (2147483648L);
-      m.op ("+");
-      tt = m.pop();
-      assertTrue ("2147483649 + 2147483648 must be 4294967297; ",
-         tt==4294967297L); 
       m.push (5);
       m.push (3);
       m.op ("-");
@@ -67,22 +61,22 @@ public class LongStackTest {
 
    @Test (timeout=1000)
    public void testTos() {
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       m.push (2);
       m.push (5);
-      long k = m.tos();
-      long k2 = m.pop();
+      int k = m.tos();
+      int k2 = m.pop();
       assertEquals ("5 must be on top ", 5, k);
       assertEquals ("tos must not change the top;", 5, k2);
-      long k3 = m.pop();
+      int k3 = m.pop();
       assertEquals ("tos must not change the stack;", 2, k3);
       assertTrue ("tos must not pop;", m.stEmpty());
    }
 
    @Test (timeout=1000)
    public void testEquals() {
-      LongStack m1 = new LongStack();
-      LongStack m2 = new LongStack();
+      IntStack m1 = new IntStack();
+      IntStack m2 = new IntStack();
       assertTrue ("two empty stacks must be equal;", m1.equals(m2));
       m1.push (1);
       m2.push (1);
@@ -102,25 +96,25 @@ public class LongStackTest {
 
    @Test (expected=RuntimeException.class)
    public void testPopEmpty() {
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       m.pop();
    }
 
    @Test (expected=RuntimeException.class)
    public void testOpUnderflow() {
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       m.push (4);
       m.op ("+");
    }
 
    @Test (timeout=1000)
    public void testClone() {
-      LongStack m1 = new LongStack();
+      IntStack m1 = new IntStack();
       m1.push (5);
       m1.push (4);
-      LongStack m2 = null;
+      IntStack m2 = null;
       try {
-         m2 = (LongStack)m1.clone();
+         m2 = (IntStack)m1.clone();
       } catch (CloneNotSupportedException e) {};
       assertNotSame ("clone must differ from original;", m2, m1);
       assertEquals ("clone must be equal to original;", m2, m1);
@@ -131,7 +125,7 @@ public class LongStackTest {
 
    @Test (timeout=1000)
    public void testToString() {
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       assertNotNull ("empty stack must be ok;", m.toString());
       m.push (-8);
       m.push (7);
@@ -145,83 +139,83 @@ public class LongStackTest {
 
    @Test (expected=RuntimeException.class)
    public void testTosUnderflow() {
-      LongStack m = new LongStack();
+      IntStack m = new IntStack();
       m.tos();
    }
 
    @Test (timeout=1000)
    public void testInterpret() {
       String s = "1";
-      assertEquals ("expression: " + s, 1, LongStack.interpret (s));
+      assertEquals ("expression: " + s, 1, IntStack.interpret (s));
       s = "2 5 -";
-      assertEquals ("expression: " + s, -3, LongStack.interpret (s));
+      assertEquals ("expression: " + s, -3, IntStack.interpret (s));
       s = "35 10 -3 + /";
-      assertEquals ("expression: " + s, 5, LongStack.interpret (s));
+      assertEquals ("expression: " + s, 5, IntStack.interpret (s));
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretStackbalance() {
       String s = "35 10 -3 + / 2";
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretIllegalArg1() {
       String s = "35 10 -3 + x 2";
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretIllegalArg2() {
       String s = "35 y 10 -3 + - +";
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretUnderflow() {
       String s = "35 10 + -";
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretNull() {
       String s = null;
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretEmpty() {
       String s = "";
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
    public void testInterpretOpfirst() {
       String s = "- 3 2";
-      LongStack.interpret (s);
+      IntStack.interpret (s);
    }
 
    @Test (timeout=1000)
    public void testInterpretLong() {
       String s = "1 -10 4 8 3 - + * +";
       assertEquals ("expression: " + Aout.toString (s), -89,
-         LongStack.interpret (s));
+         IntStack.interpret (s));
       s = "156 154 152 - 3 + -";
       assertEquals ("expression: " + Aout.toString (s), 151,
-         LongStack.interpret (s));
+         IntStack.interpret (s));
    }
 
    @Test (timeout=1000)
    public void testInterpretTokenizer() {
       String s = "1  2    +";
       assertEquals ("expression: " + Aout.toString (s), 3, 
-         LongStack.interpret (s));
+         IntStack.interpret (s));
       s = "   \t \t356  \t \t";
       assertEquals ("expression: " + Aout.toString (s), 356,
-         LongStack.interpret (s));
+         IntStack.interpret (s));
       s = "\t2 \t5 +   \t";
       assertEquals ("expression: " + Aout.toString (s), 7, 
-         LongStack.interpret (s));
+         IntStack.interpret (s));
    }
 }
 
