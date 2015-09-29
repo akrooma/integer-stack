@@ -1,12 +1,14 @@
+import java.util.LinkedList;
 
 public class IntStack {
+	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-      // TODO!!! Your tests here!
+	   
    }
 
    IntStack() {
-      // TODO!!! Your constructor here!
+	   this.integerStack = new LinkedList<Integer>();
    }
 
    @Override
@@ -15,28 +17,42 @@ public class IntStack {
    }
 
    public boolean stEmpty() {
-      return false; // TODO!!! Your code here!
+	   return (this.integerStack.size() == 0);
    }
 
    public void push (int a) {
-      // TODO!!! Your code here!
+	   this.integerStack.addFirst(a);
    }
 
    public int pop() {
-      return 0; // TODO!!! Your code here!
-   } // pop
+	   if (this.stEmpty())
+		   throw new RuntimeException("Stack is empty.");
+	   return this.integerStack.removeFirst();
+   }
 
    public void op (String s) {
       // TODO!!!
    }
   
    public int tos() {
-      return 0; // TODO!!! Your code here!
+	   if (this.stEmpty())
+		   throw new RuntimeException("Stack is empty.");
+      return this.integerStack.getFirst();
    }
 
    @Override
    public boolean equals (Object o) {
       return true; // TODO!!! Your code here!
+   }
+   
+   public boolean equals (IntStack stack) {
+	   if (this.integerStack.size() != stack.size())
+		   return false;
+      return true; // TODO!!! Your code here!
+   }
+   
+   public int size(){
+	   return this.integerStack.size();
    }
 
    @Override
