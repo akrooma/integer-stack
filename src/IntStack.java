@@ -4,25 +4,7 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-//	   String s = "   \t \t356  \t \t";
-//	   
-//	   System.out.println("'" + s + "'");
-//	   
-//	   System.out.println();
-//	   
-//	   for (String token : s.split("\\s+")){
-//		   System.out.println("--" + token + "--");
-//	   }
-//	   
-//	   System.out.println();
-//	   
-//	   s = s.replaceAll("\\s+", " ").trim();
-//	   System.out.println("'" + s + "'");
-	   
-//	   String pattern2 = "5 -";
-//	   if (!(pattern2.matches("[\\s-+*/]+"))) {
-//		   System.out.println("Operandid puuduvad.");
-//	   }
+
    }
 
    IntStack() {
@@ -39,7 +21,8 @@ public class IntStack {
 	   for (int i = 0; i < this.integerStack.size(); i++) {
 		   clone.addLast(this.integerStack.get(i));
 	   }
-      return clone;
+	   
+	   return clone;
    }
    
    public void addLast (int a) {
@@ -149,14 +132,9 @@ public class IntStack {
 		   
 		   if (tokenInt != null){
 			   stack.push(tokenInt);
-//		   } else if (token.equals("-") || token.equals("+") || token.equals("*") || token.equals("/")) {
-//			   stack.op(token);
 		   } else {
 			   stack.op(token);
 		   }
-//		   } else {
-//			   throw new RuntimeException("Something went wrong.");
-//		   }
 	   }
 	   
 	   int result = stack.pop();
