@@ -13,7 +13,15 @@ public class IntStack {
 
    @Override
    public Object clone() throws CloneNotSupportedException {
-      return this; // TODO!!! Your code here!
+	   if (this.integerStack.size() == 0)
+		   throw new RuntimeException("Nothing to clone.");
+	   
+	   LinkedList<Integer> clone = new LinkedList<Integer>();
+	   
+	   for (int i = 0; i < this.integerStack.size(); i++) {
+		   clone.addLast(this.integerStack.get(i));
+	   }
+      return clone; // TODO!!! Your code here!
    }
 
    public boolean stEmpty() {
@@ -31,7 +39,16 @@ public class IntStack {
    }
 
    public void op (String s) {
-      // TODO!!!
+	   if (this.integerStack.size() == 0)
+		   throw new RuntimeException("Stack is empty.");
+	   
+	   int x2 = this.integerStack.pop();
+	   int x1 = this.integerStack.pop();
+	   
+	   if (s.equals("-")) push(x1 - x2);
+	   if (s.equals("+")) push(x1 + x2);
+	   if (s.equals("*")) push(x1 * x2);
+	   if (s.equals("/")) push(x1 / x2);
    }
   
    public int tos() {
@@ -42,22 +59,44 @@ public class IntStack {
 
    @Override
    public boolean equals (Object o) {
-      return true; // TODO!!! Your code here!
-   }
-   
-   public boolean equals (IntStack stack) {
-	   if (this.integerStack.size() != stack.size())
+//	   if (!(o instanceof LinkedList<?>))
+//		   return false;
+	   int a = this.integerStack.size();
+	   int b = ((LinkedList<Integer>) o).size();
+	   
+	   if (a != b)
 		   return false;
-      return true; // TODO!!! Your code here!
+	   
+	   for (int i = 0; i < a; i++) {
+		   if (this.integerStack.get(i) != ((LinkedList<Integer>) o).get(i)) {
+			   return false;
+		   }
+	   }
+	   return true; // TODO!!! Your code here!
    }
    
-   public int size(){
-	   return this.integerStack.size();
-   }
+//   public boolean equals (IntStack stack) {
+//	   if (this.integerStack.size() != stack.size())
+//		   return false;
+//      return true;
+//   }
+//   
+//   public int size(){
+//	   return this.integerStack.size();
+//   }
 
    @Override
    public String toString() {
-      return null; // TODO!!! Your code here!
+	   if (this.integerStack.size() == 0)
+		   return "Stack is empty.";
+	   
+	   StringBuffer sb = new StringBuffer();
+	   
+	   for (int i = this.integerStack.size()-1; i >= 0; i--) {
+		   sb.append(String.valueOf(this.integerStack.get(i) + " "));
+	   }
+	   
+       return sb.toString();
    }
 
    public static int interpret (String pol) {
