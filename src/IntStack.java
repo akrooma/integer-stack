@@ -4,11 +4,16 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-//	   String pattern = "/ a d f ";
-//	   if ((pattern.matches("[-+*/].*"))) {
-//		   System.out.println("Algab halvasti.");
-//	   } else {
-//		   System.out.println("Läks hästi.");
+	   String pattern = "*";
+	   if (pattern.matches("[\\d\\s]+")) {
+		   System.out.println("No operands.");
+	   } else {
+		   System.out.println("Operandid on.");
+	   }
+	   
+//	   String pattern2 = "5 -";
+//	   if (!(pattern2.matches("[\\s-+*/]+"))) {
+//		   System.out.println("Operandid puuduvad.");
 //	   }
    }
 
@@ -119,15 +124,15 @@ public class IntStack {
 	   if (!(pol.matches("[\\s\\d-+*/]+")))
 		   throw new RuntimeException("Contains illegal characters.");
 	   
-	   if (pol.matches("[\\d\\s]+"))
-		   throw new RuntimeException("Contains no operands.");
+//	   if (pol.matches("[\\d\\s]+"))
+//		   throw new RuntimeException("No operands found.");
 	   
 	   if (pol.matches("[-+*/].*"))
 		   throw new RuntimeException("Starts with an operand.");
 	   
 	   IntStack stack = new IntStack();
 	   
-	   for (String token : pol.split("\\s")) {
+	   for (String token : pol.split("\\s+")) {
 		   Integer tokenInt = null;
 		   
 		   try {
