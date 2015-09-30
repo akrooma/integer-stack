@@ -4,7 +4,7 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-
+	   
    }
 
    IntStack() {
@@ -108,7 +108,8 @@ public class IntStack {
    //Mingil m‰‰ral kasutasin siit saidilt saadud koodi: 
    //http://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm
    public static int interpret (String pol) {
-	   pol = pol.replaceAll("\\s+", " ").trim();
+//	   pol = pol.replaceAll("\\s+", " ").trim();
+	   pol = pol.trim();
 	   if (pol.length() == 0)
 		   throw new RuntimeException("Empty string.");
 	   
