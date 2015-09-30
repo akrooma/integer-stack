@@ -4,12 +4,20 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-	   String pattern = "*";
-	   if (pattern.matches("[\\d\\s]+")) {
-		   System.out.println("No operands.");
-	   } else {
-		   System.out.println("Operandid on.");
+	   String s = "   \t \t356  \t \t";
+	   
+	   System.out.println("'" + s + "'");
+	   
+	   System.out.println();
+	   
+	   for (String token : s.split("\\s+")){
+		   System.out.println("--" + token + "--");
 	   }
+	   
+	   System.out.println();
+	   
+	   s = s.replaceAll("\\s+", " ").trim();
+	   System.out.println("'" + s + "'");
 	   
 //	   String pattern2 = "5 -";
 //	   if (!(pattern2.matches("[\\s-+*/]+"))) {
@@ -117,7 +125,7 @@ public class IntStack {
    //Mingil m‰‰ral kasutasin siit saidilt saadud koodi: 
    //http://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm
    public static int interpret (String pol) {
-	   pol.trim();
+	   pol = pol.replaceAll("\\s+", " ").trim();
 	   if (pol.length() == 0)
 		   throw new RuntimeException("Empty string.");
 	   
