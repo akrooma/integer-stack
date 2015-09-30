@@ -4,20 +4,20 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-	   String s = "   \t \t356  \t \t";
-	   
-	   System.out.println("'" + s + "'");
-	   
-	   System.out.println();
-	   
-	   for (String token : s.split("\\s+")){
-		   System.out.println("--" + token + "--");
-	   }
-	   
-	   System.out.println();
-	   
-	   s = s.replaceAll("\\s+", " ").trim();
-	   System.out.println("'" + s + "'");
+//	   String s = "   \t \t356  \t \t";
+//	   
+//	   System.out.println("'" + s + "'");
+//	   
+//	   System.out.println();
+//	   
+//	   for (String token : s.split("\\s+")){
+//		   System.out.println("--" + token + "--");
+//	   }
+//	   
+//	   System.out.println();
+//	   
+//	   s = s.replaceAll("\\s+", " ").trim();
+//	   System.out.println("'" + s + "'");
 	   
 //	   String pattern2 = "5 -";
 //	   if (!(pattern2.matches("[\\s-+*/]+"))) {
@@ -135,8 +135,8 @@ public class IntStack {
 //	   if (pol.matches("[\\d\\s]+"))
 //		   throw new RuntimeException("No operands found.");
 	   
-	   if (pol.matches("[-+*/].*"))
-		   throw new RuntimeException("Starts with an operand.");
+//	   if (pol.matches("[-+*/].*"))
+//		   throw new RuntimeException("Starts with an operand.");
 	   
 	   IntStack stack = new IntStack();
 	   
