@@ -4,7 +4,12 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-	   
+//	   String pattern = "/ a d f ";
+//	   if ((pattern.matches("[-+*/].*"))) {
+//		   System.out.println("Algab halvasti.");
+//	   } else {
+//		   System.out.println("Läks hästi.");
+//	   }
    }
 
    IntStack() {
@@ -16,12 +21,16 @@ public class IntStack {
 	   if (this.integerStack.size() == 0)
 		   throw new RuntimeException("Nothing to clone.");
 	   
-	   LinkedList<Integer> clone = new LinkedList<Integer>();
+	   IntStack clone = new IntStack();
 	   
 	   for (int i = 0; i < this.integerStack.size(); i++) {
 		   clone.addLast(this.integerStack.get(i));
 	   }
-      return clone; // TODO!!! Your code here!
+      return clone;
+   }
+   
+   public void addLast (int a) {
+	   this.integerStack.addLast(a);
    }
 
    public boolean stEmpty() {
@@ -59,31 +68,32 @@ public class IntStack {
 
    @Override
    public boolean equals (Object o) {
-//	   if (!(o instanceof LinkedList<?>))
-//		   return false;
-	   int a = this.integerStack.size();
-	   int b = ((LinkedList<Integer>) o).size();
-	   
-	   if (a != b)
-		   return false;
-	   
-	   for (int i = 0; i < a; i++) {
-		   if (this.integerStack.get(i) != ((LinkedList<Integer>) o).get(i)) {
+	   if (o instanceof IntStack){
+		   int thisLength = this.integerStack.size();
+		   int inputLength = ((IntStack) o).size();
+		   
+		   if (thisLength == 0 && inputLength == 0)
+			   return true;
+		   
+		   if (thisLength != inputLength)
 			   return false;
+		   
+		   for (int i = 0; i < thisLength; i++) {
+			   if (!(this.integerStack.get(i).equals(((IntStack) o).get(i))))
+				   return false;
 		   }
+		   return true;
 	   }
-	   return true; // TODO!!! Your code here!
+	   return false;
    }
    
-//   public boolean equals (IntStack stack) {
-//	   if (this.integerStack.size() != stack.size())
-//		   return false;
-//      return true;
-//   }
-//   
-//   public int size(){
-//	   return this.integerStack.size();
-//   }
+   public int size(){
+	   return this.integerStack.size();
+   }
+   
+   public int get(int index){
+	   return this.integerStack.get(index);
+   }
 
    @Override
    public String toString() {
@@ -98,9 +108,40 @@ public class IntStack {
 	   
        return sb.toString();
    }
-
+   
+   //Mingil määral kasutasin siit saidilt saadud koodi: 
+   //http://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm
    public static int interpret (String pol) {
-      return 0; // TODO!!! Your code here!
+	   pol.trim();
+	   if (pol.length() == 0)
+		   throw new RuntimeException("Empty string.");
+	   
+	   if (!(pol.matches("[\\s\\d-+*/]+")))
+		   throw new RuntimeException("Contains illegal characters.");
+	   
+	   if (pol.matches("[\\d\\s]+"))
+		   throw new RuntimeException("Contains no operands.");
+	   
+	   if (pol.matches("[-+*/].*"))
+		   throw new RuntimeException("Starts with an operand.");
+	   
+	   for (String token : pol.split("\\s")) {
+		   Integer tokenInt = null;
+		   
+		   try {
+			   tokenInt = Integer.parseInt(token);
+		   } catch (NumberFormatException e) {}
+		   
+		   if (tokenInt != null){
+			   integerStack.push(tokenInt);
+		   }
+	   }
+	   
+	   return 0;
+   }
+   
+   public void clear() {
+	   this.integerStack.clear();
    }
 
 }
