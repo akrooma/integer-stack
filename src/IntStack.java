@@ -125,6 +125,8 @@ public class IntStack {
 	   if (pol.matches("[-+*/].*"))
 		   throw new RuntimeException("Starts with an operand.");
 	   
+	   IntStack stack = new IntStack();
+	   
 	   for (String token : pol.split("\\s")) {
 		   Integer tokenInt = null;
 		   
@@ -133,15 +135,24 @@ public class IntStack {
 		   } catch (NumberFormatException e) {}
 		   
 		   if (tokenInt != null){
-			   integerStack.push(tokenInt);
+			   stack.push(tokenInt);
+//		   } else if (token.equals("-") || token.equals("+") || token.equals("*") || token.equals("/")) {
+//			   stack.op(token);
+		   } else {
+			   stack.op(token);
 		   }
+//		   } else {
+//			   throw new RuntimeException("Something went wrong.");
+//		   }
 	   }
 	   
-	   return 0;
-   }
-   
-   public void clear() {
-	   this.integerStack.clear();
+	   int result = stack.pop();
+	   
+	   if (stack.stEmpty()) {
+		   return result;
+	   } else {
+		   throw new RuntimeException("Excess elements found. " + stack.toString());
+	   }
    }
 
 }
