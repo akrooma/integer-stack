@@ -4,7 +4,7 @@ public class IntStack {
 	private LinkedList<Integer> integerStack;
 
    public static void main (String[] argum) {
-	   
+
    }
 
    IntStack() {
@@ -21,7 +21,6 @@ public class IntStack {
 	   for (int i = 0; i < this.integerStack.size(); i++) {
 		   clone.addLast(this.integerStack.get(i));
 	   }
-	   
 	   return clone;
    }
    
@@ -47,13 +46,17 @@ public class IntStack {
 	   if (this.integerStack.size() == 0)
 		   throw new RuntimeException("Stack is empty.");
 	   
-	   int x2 = this.integerStack.pop();
-	   int x1 = this.integerStack.pop();
-	   
-	   if (s.equals("-")) push(x1 - x2);
-	   if (s.equals("+")) push(x1 + x2);
-	   if (s.equals("*")) push(x1 * x2);
-	   if (s.equals("/")) push(x1 / x2);
+	   if (s.matches("[-+*/]")) {
+		   int x2 = this.integerStack.pop();
+		   int x1 = this.integerStack.pop();
+		   
+		   if (s.equals("-")) push(x1 - x2);
+		   if (s.equals("+")) push(x1 + x2);
+		   if (s.equals("*")) push(x1 * x2);
+		   if (s.equals("/")) push(x1 / x2);
+	   } else {
+		   throw new RuntimeException("String is not a legal operand.");
+	   }
    }
   
    public int tos() {
@@ -108,8 +111,8 @@ public class IntStack {
    //Mingil määral kasutasin siit saidilt saadud koodi: 
    //http://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm
    public static int interpret (String pol) {
-//	   pol = pol.replaceAll("\\s+", " ").trim();
 	   pol = pol.trim();
+	   
 	   if (pol.length() == 0)
 		   throw new RuntimeException("Empty string.");
 	   
