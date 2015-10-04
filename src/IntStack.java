@@ -13,9 +13,6 @@ public class IntStack {
 
    @Override
    public Object clone() throws CloneNotSupportedException {
-	   if (this.integerStack.size() == 0)
-		   throw new RuntimeException("Nothing to clone.");
-	   
 	   IntStack clone = new IntStack();
 	   
 	   for (int i = 0; i < this.integerStack.size(); i++) {
@@ -43,7 +40,7 @@ public class IntStack {
    }
 
    public void op (String s) {
-	   if (this.integerStack.size() == 0)
+	   if (this.stEmpty())
 		   throw new RuntimeException("Stack is empty.");
 	   
 	   if (s.matches("[-+*/]")) {
@@ -55,7 +52,7 @@ public class IntStack {
 		   if (s.equals("*")) push(x1 * x2);
 		   if (s.equals("/")) push(x1 / x2);
 	   } else {
-		   throw new RuntimeException("String is not a legal operand.");
+		   throw new RuntimeException("String '" + s + "' is not a legal operand.");
 	   }
    }
   
@@ -114,16 +111,10 @@ public class IntStack {
 	   pol = pol.trim();
 	   
 	   if (pol.length() == 0)
-		   throw new RuntimeException("Empty string.");
+		   throw new RuntimeException("Empty RPN.");
 	   
 	   if (!(pol.matches("[\\s\\d-+*/]+")))
-		   throw new RuntimeException("Contains illegal characters.");
-	   
-//	   if (pol.matches("[\\d\\s]+"))
-//		   throw new RuntimeException("No operands found.");
-	   
-//	   if (pol.matches("[-+*/].*"))
-//		   throw new RuntimeException("Starts with an operand.");
+		   throw new RuntimeException("RPN: '" + pol + "' must contain only integers and operators -, +, * and/or /.");
 	   
 	   IntStack stack = new IntStack();
 	   
@@ -146,7 +137,7 @@ public class IntStack {
 	   if (stack.stEmpty()) {
 		   return result;
 	   } else {
-		   throw new RuntimeException("Excess elements found. " + stack.toString());
+		   throw new RuntimeException("Excess elements found in stack after interpreting RPN: " + stack.toString());
 	   }
    }
 
